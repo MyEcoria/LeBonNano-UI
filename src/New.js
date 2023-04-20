@@ -3,6 +3,7 @@ import { Form, Input, Button, Upload, message, Layout, Card, Row, Col, Avatar, R
 import { UploadOutlined } from "@ant-design/icons";
 import Navigation from './components/Navigation';
 import FooterComponent from './components/Footer';
+import general from './config/general.json';
 
 const { Header, Content, Footer } = Layout;
 
@@ -60,7 +61,7 @@ function NewItemForm() {
     formData.append("uuid", uuid1);
 
     try {
-      const response = await fetch("http://localhost:8080/new", {
+      const response = await fetch(`${general["url"]}/new`, {
         method: "POST",
         body: formData,
       });

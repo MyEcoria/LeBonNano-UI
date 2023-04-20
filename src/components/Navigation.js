@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import '../css/nav.css'; 
 
 const { Header } = Layout;
+const { Search } = Input;
 
 function Navigation() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
-
 
   useEffect(() => {
     const uuid = getCookie('uuid');
@@ -51,6 +51,11 @@ function Navigation() {
         <Menu.Item key="4" onClick={handleLogout}>
           Se déconnecter
         </Menu.Item>
+        <Search
+          placeholder="Rechercher"
+          onSearch={(value) => window.location.href=`/search/${value}`}
+          style={{ width: 200, marginLeft: 'auto', marginRight: '20px' }}
+        />
       </Menu>
     );
   };
@@ -64,7 +69,11 @@ function Navigation() {
         <Menu.Item key="2">
           <Link to="/login">Se connecter</Link>
         </Menu.Item>
-        
+        <Search
+          placeholder="Rechercher"
+          onSearch={(value) => window.location.href=`/search/${value}`}
+          style={{ width: 200, marginLeft: 'auto', marginRight: '20px' }}
+        />
       </Menu>
     );
   };

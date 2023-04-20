@@ -10,22 +10,16 @@ import general from './config/general.json';
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
-function User() {
-  const { userId } = useParams();
+function Search() {
+  const { search } = useParams();
   const [userData, setUserData] = useState(null);
-  const [userData1, setUserData1] = useState([]);
 
   useEffect(() => {
-    fetch(`${general["url"]}/user/${userId}`)
+    fetch(`${general["url"]}/search/${search}`)
       .then(response => response.json())
       .then(data => setUserData(data))
       .catch(error => console.error(error));
-
-    fetch(`${general["url"]}/anUser/${userId}`)
-      .then(response => response.json())
-      .then(data => setUserData1(data))
-      .catch(error => console.error(error));
-  }, [userId]);
+  }, [search]);
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -37,23 +31,10 @@ function User() {
         <Navigation />
       </Header>
       <Content style={{ padding: '0 50px', marginTop: '15px' }}>
-        <Card>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Avatar size={200} src={`https://natricon.com/api/v1/nano?address=${userData.address}&svc=nanolooker`} />
-            </Col>
-            <Col xs={24} sm={24} md={16} lg={16} xl={16}>
-              <Card.Meta title={userData.name} />
-              <p style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>Adresse: {userData.address}</p>
-              <p style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>Nom: {userData.name}</p>
-              <Rate defaultValue={userData.score} disabled/>
-            </Col>
-          </Row>
-        </Card>
         <Content style={{ padding: '0 50px' }}>
           <Title level={2}>Produits</Title>
           <Row gutter={[16, 16]}>
-            {userData1.map(product => (
+            {userData.map(product => (
                 <Col key={product.id} xs={24} sm={12} md={8} lg={6}>
                 {product.add ? (
                     <Card
@@ -86,4 +67,4 @@ function User() {
   );
 }
 
-export default User;
+export default Search;

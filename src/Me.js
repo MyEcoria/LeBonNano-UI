@@ -4,7 +4,7 @@ import { Layout, Card, Row, Col, Avatar, Rate, Typography, Form, Select, Space, 
 import Navigation from './components/Navigation';
 import FooterComponent from './components/Footer';
 import { ShoppingCartOutlined, EditOutlined } from '@ant-design/icons';
-
+import general from './config/general.json';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -31,12 +31,12 @@ function NewMe() {
     if (!uuid) {
       setIsLoggedIn(true);
     } else {
-      fetch(`http://localhost:8080/theUser/${uuid}`)
+      fetch(`${general["url"]}/theUser/${uuid}`)
         .then(response => response.json())
         .then(data => setUserData(data))
         .catch(error => console.error(error));
 
-      fetch(`http://localhost:8080/anUuid/${uuid}`)
+      fetch(`${general["url"]}/anUuid/${uuid}`)
         .then(response => response.json())
         .then(data => setUserData1(data))
         .catch(error => console.error(error));
@@ -48,7 +48,7 @@ function NewMe() {
 
   const handleGetRequest = () => {
     const uuid1 = getCookie('uuid');
-    fetch(`http://localhost:8080/change/${uuid1}/${newName}`)
+    fetch(`${general["url"]}/change/${uuid1}/${newName}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -108,7 +108,7 @@ function NewMe() {
                 {product.add ? (
                     <Card
                     hoverable
-                    cover={<img alt={product.name} src={`http://localhost:8080/image/${product.image}`} />}
+                    cover={<img alt={product.name} src={`${general["url"]}/image/${product.image}`} />}
                     actions={[<Link to={`/article/${product.id}`}>Voir plus</Link>]}
                     >
                     <Card.Meta

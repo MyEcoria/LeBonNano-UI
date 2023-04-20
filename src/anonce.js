@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Layout ,Card, Avatar, Button, Space, Typography } from 'antd';
 import Navigation from './components/Navigation';
 import Foter from './components/Footer';
+import general from './config/general.json';
 
 const { Meta } = Card;
 const { Header, Content, Footer } = Layout;
@@ -14,7 +15,7 @@ function ArticleDetail() {
 
   useEffect(() => {
     // Faire une requête pour obtenir les détails de l'article avec l'ID spécifié
-    fetch(`http://localhost:8080/annonce/${id}`)
+    fetch(`${general["url"]}/annonce/${id}`)
       .then(response => response.json())
       .then(data => setArticle(data))
       .catch(error => console.error(error));
@@ -35,7 +36,7 @@ function ArticleDetail() {
       <Content style={{ padding: '0 50px' }}>
         <Title level={2}>{title}</Title>
         <Card
-          cover={<img alt={title} src={`http://localhost:8080/image/${image}`} />}
+          cover={<img alt={title} src={`${general["url"]}/image/${image}`} />}
           style={{ width: '50%', margin: '0 auto' }}
         >
           <Meta

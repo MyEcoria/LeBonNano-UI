@@ -7,6 +7,7 @@ import Anonce from './anonce';
 import New from './New';
 import Login from './Login';
 import Me from './Me';
+import Search from './Search';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/new" element={<New />} />
         <Route path="/login" element={<Login />} />
         <Route path="/me" element={<Me />} />
+        <Route path="/search/:search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );

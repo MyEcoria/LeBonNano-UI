@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Layout, message, Card, Avatar, Button } from 'antd';
 import Navigation from './components/Navigation';
 import FooterComponent from './components/Footer';
+import general from './config/general.json';
 
 const { Content } = Layout;
 
@@ -23,7 +24,7 @@ function Login() {
     if (uuid) {
       setIsLoggedIn(true);
     }
-    const socket = new WebSocket('ws://localhost:8081');
+    const socket = new WebSocket(general["wsUrl"]);
     socket.addEventListener('open', () => {
       socket.send(JSON.stringify({ action: 'login' }));
     });
@@ -35,7 +36,7 @@ function Login() {
       } else if (message.action === 'add') {
         document.cookie = `uuid=${message.account}`;
         setIsLoggedIn(true);
-        window.location.href = `http://localhost:3000/user/${message.add}`;
+        window.location.href = `${general["url"]}/user/${message.add}`;
       }
       setMessageReceived(event.data);
     });

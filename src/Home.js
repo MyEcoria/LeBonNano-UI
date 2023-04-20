@@ -5,6 +5,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import Navigation from './components/Navigation';
 import { Footer } from 'antd/es/layout/layout';
 import Foter from './components/Footer';
+import general from './config/general.json';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -13,7 +14,7 @@ function Home() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/home')
+    fetch(`${general["url"]}/home`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
@@ -32,7 +33,7 @@ function Home() {
               {product.add ? (
                 <Card
                   hoverable
-                  cover={<img alt={product.name} src={`http://localhost:8080/image/${product.image}`} />}
+                  cover={<img alt={product.name} src={`${general["url"]}/image/${product.image}`} />}
                   actions={[<Link to={`/article/${product.id}`}>Voir plus</Link>, <ShoppingCartOutlined />]}
                 >
                   <Card.Meta

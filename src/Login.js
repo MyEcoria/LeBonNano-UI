@@ -36,7 +36,7 @@ function Login() {
       } else if (message.action === 'add') {
         document.cookie = `uuid=${message.account}`;
         setIsLoggedIn(true);
-        window.location.href = `${general["url"]}/user/${message.add}`;
+        window.location.href = `${general["site"]}/me`;
       }
       setMessageReceived(event.data);
     });
